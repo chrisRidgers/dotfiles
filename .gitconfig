@@ -1,0 +1,9 @@
+[user]
+	email = your@email.com
+	name = Chris Ridgers
+[push]
+	default = simple
+[color]
+	ui = auto
+[core]
+	editor = vim
