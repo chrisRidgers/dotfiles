@@ -70,9 +70,7 @@ xterm*|rxvt*)
     ;;
 *)
     ;;
-esac
-
-# enable color support of ls and also add handy aliases
+esac # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
@@ -139,3 +137,5 @@ if [ -n "$PS1" ]; then
     # \h - hostname, \u - username                                                               
     PS1='\[\e[0;32m\]\u\[\e[1;34m\]@\h\[\e[0;34m\]:/../$TRIMMED_PWD\$ \[\e[0;0m\]'                                           
 fi 
+
+export PATH="$PATH:$HOME/.composer/vendor/bin"

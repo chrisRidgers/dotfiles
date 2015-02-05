@@ -9,6 +9,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-surround'
 "Plugin 'Valloric/YouCompleteMe'
 Plugin 'craigemery/vim-autotag'
+Bundle 'stephpy/vim-php-cs-fixer'
 
 call vundle#end()
 
@@ -99,3 +100,6 @@ let g:netrw_banner		= 0
 let g:netrw_fastbrowse		= 2
 let g:netrw_winsize 		= 80 
 let g:netrw_keepdir 		= 1
+
+"php codesniffer
+let g:php_cs_fixer_level = "psr2"
