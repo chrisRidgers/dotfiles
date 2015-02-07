@@ -117,25 +117,24 @@ export LD_PRELOAD="/home/cridgers/stderred/build/libstderred.so${LD_PRELOAD:+:$L
 # If PS1 is not set at all, this is not an interactive                          
 # shell and we should not mess with it.                                         
 if [ -n "$PS1" ]; then                                                          
-    # A temporary variable to contain our prompt command                    
-    NEW_PROMPT_COMMAND='                                                    
-    TRIMMED_PWD="${PWD: -37}";                                              
-    TRIMMED_PWD="${TRIMMED_PWD:-$PWD}"                                      
-    '                                                                       
-    # If there's an existing prompt command, let's not                      
-    # clobber it                                                            
-    if [ -n "$PROMPT_COMMAND" ]; then                                       
-	PROMPT_COMMAND="$PROMPT_COMMAND;$NEW_PROMPT_COMMAND"            
-    else                                                                    
-	PROMPT_COMMAND="$NEW_PROMPT_COMMAND"                            
-    fi                                                                      
+	# A temporary variable to contain our prompt command                    
+	NEW_PROMPT_COMMAND='TRIMMED_PWD="${PWD: -37}";
+	TRIMMED_PWD="${TRIMMED_PWD:-$PWD}"'
 
-    # We're done with our temporary variable                                
-    unset NEW_PROMPT_COMMAND                                                
+	# If there's an existing prompt command, let's not                      
+	# clobber it                                                            
+	if [ -n "$PROMPT_COMMAND" ]; then
+		PROMPT_COMMAND="$PROMPT_COMMAND $NEW_PROMPT_COMMAND"            
+	else                                                                    
+		PROMPT_COMMAND="$NEW_PROMPT_COMMAND"                            
+	fi                                                                      
 
-    # Set PS1 with our new variable                                         
-    # \h - hostname, \u - username                                                               
-    PS1='\[\e[0;32m\]\u\[\e[1;34m\]@\h\[\e[0;34m\]:/../$TRIMMED_PWD\$ \[\e[0;0m\]'                                           
+	# We're done with our temporary variable                                
+	unset NEW_PROMPT_COMMAND                                                
+
+	# Set PS1 with our new variable                                         
+	# \h - hostname, \u - username                                                               
+	PS1='\[\e[0;32m\]\u\[\e[1;34m\]@\h\[\e[0;34m\]:/../$TRIMMED_PWD\$ \[\e[0;0m\]'                                           
 fi 
 
 export PATH="$PATH:$HOME/.composer/vendor/bin"
