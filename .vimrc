@@ -1,5 +1,6 @@
 "compatibility limitations
 set nocompatible "be ViMproved
+set t_Co=256
 
 filetype off 
 set rtp+=~/.vim/bundle/Vundle.vim
