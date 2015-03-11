@@ -109,3 +109,8 @@ let g:php_cs_fixer_php_path = "php"
 let g:php_cs_fixer_enable_default_mapping = 1
 let g:php_cs_fixer_dry_run = 0
 let g:php_cs_fixer_verbose = 1
+
+"solarized colorscheme
+let g:solarized_colors = 256
+let g:solarized_termtrans = 1
+colorscheme solarized
