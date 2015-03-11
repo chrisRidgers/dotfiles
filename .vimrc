@@ -1,14 +1,13 @@
 "compatibility limitations
 set nocompatible "be ViMproved
 
-filetype off 
+filetype off
+
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-surround'
-"Plugin 'Valloric/YouCompleteMe'
-Plugin 'craigemery/vim-autotag'
 
 call vundle#end()
 
@@ -23,6 +22,9 @@ filetype plugin indent on
 
 "enable syntax highlighting
 syntax enable
+
+"set colorcolumn
+set colorcolumn=80
 
 "enable hidden buffers
 "set hidden
@@ -87,8 +89,7 @@ set virtualedit=all
 "incrementally match search
 set incsearch
 
-"colorcolumn and wrapping
-set colorcolumn=81
+set t_Co=256
 
 "netrw_setup
 let g:netrw_preview 		= 1
