@@ -90,7 +90,7 @@ set virtualedit=all
 set incsearch
 
 "colorcolumn and wrapping
-set colorcolumn=81
+set colorcolumn=80
 
 "netrw_setup
 let g:netrw_preview 		= 1
@@ -104,3 +104,8 @@ let g:netrw_keepdir 		= 1
 
 "php codesniffer
 let g:php_cs_fixer_level = "psr2"
+let g:php_cs_fixer_config = "default"
+let g:php_cs_fixer_php_path = "php"
+let g:php_cs_fixer_enable_default_mapping = 1
+let g:php_cs_fixer_dry_run = 0
+let g:php_cs_fixer_verbose = 1
