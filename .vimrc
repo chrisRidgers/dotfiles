@@ -10,7 +10,9 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-surround'
 "Plugin 'Valloric/YouCompleteMe'
 Plugin 'craigemery/vim-autotag'
-Bundle 'stephpy/vim-php-cs-fixer'
+"Bundle 'stephpy/vim-php-cs-fixer'
+Plugin 'lepture/vim-jinja'
+Plugin 'joonty/vim-phpqa.git'
 
 call vundle#end()
 
@@ -97,20 +99,18 @@ let g:netrw_preview 		= 1
 let g:netrw_liststyle 		= 4
 let g:netrw_browse_split 	= 4
 let g:netrw_altv		= 1
-let g:netrw_banner		= 0
+"let g:netrw_banner		= 0
 let g:netrw_fastbrowse		= 2
 let g:netrw_winsize 		= 80 
 let g:netrw_keepdir 		= 1
 
-"php codesniffer
-let g:php_cs_fixer_level = "psr2"
-let g:php_cs_fixer_config = "default"
-let g:php_cs_fixer_php_path = "php"
-let g:php_cs_fixer_enable_default_mapping = 1
-let g:php_cs_fixer_dry_run = 0
-let g:php_cs_fixer_verbose = 1
-
 "solarized colorscheme
+set background=light
 let g:solarized_colors = 256
 let g:solarized_termtrans = 1
 colorscheme solarized
+
+autocmd BufNewFile,BufRead *.html.twig set syntax=jinja.html
+
+"phpqa
+let g:phpqa_codesniffer_args = "--standard=PSR2"
