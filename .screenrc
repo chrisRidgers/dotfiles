@@ -1,8 +1,10 @@
 vbell off
 startup_message off
-
-#attrcolor b ".I"
-#termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E38;5;%dm'
-#defbce "on"
-
+hardstatus             alwayslastline
+hardstatus string "%H %-Lw%{= bW}%n%f %t%{-}%+Lw"
 term xterm-256color
+
+termcapinfo xterm* ti@:te@
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+defbce on
+attrcolor b ".I"

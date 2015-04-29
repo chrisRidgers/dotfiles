@@ -114,27 +114,18 @@ fi
 export TERM=screen-256color-bce
 export LD_PRELOAD="/home/cridgers/stderred/build/libstderred.so${LD_PRELOAD:+:$LD_PRELOAD}"
 
-# If PS1 is not set at all, this is not an interactive                          
-# shell and we should not mess with it.                                         
-if [ -n "$PS1" ]; then                                                          
-	# A temporary variable to contain our prompt command                    
-	NEW_PROMPT_COMMAND='TRIMMED_PWD="${PWD: -37}";
-	TRIMMED_PWD="${TRIMMED_PWD:-$PWD}"'
+black=$(tput -Txterm setaf 0)
+red=$(tput -Txterm setaf 1)
+green=$(tput -Txterm setaf 2)
+yellow=$(tput -Txterm setaf 3)
+dk_blue=$(tput -Txterm setaf 4)
+pink=$(tput -Txterm setaf 5)
+lt_blue=$(tput -Txterm setaf 6)
 
-	# If there's an existing prompt command, let's not                      
-	# clobber it                                                            
-	if [ -n "$PROMPT_COMMAND" ]; then
-		PROMPT_COMMAND="$PROMPT_COMMAND $NEW_PROMPT_COMMAND"            
-	else                                                                    
-		PROMPT_COMMAND="$NEW_PROMPT_COMMAND"                            
-	fi                                                                      
+bold=$(tput -Txterm bold)
+reset=$(tput -Txterm sgr0)
 
-	# We're done with our temporary variable                                
-	unset NEW_PROMPT_COMMAND                                                
-
-	# Set PS1 with our new variable                                         
-	# \h - hostname, \u - username                                                               
-	PS1='\[\e[0;32m\]\u\[\e[1;34m\]@\h\[\e[0;34m\]:/../$TRIMMED_PWD\$ \[\e[0;0m\]'                                           
-fi 
+# Nicely formatted terminal prompt
+export PS1='\n\[$bold\]\[$black\][\[$dk_blue\]\@\[$black\]]-[\[$green\]\u\[$yellow\]@\[$green\]\h\[$black\]]-[\[$pink\]\w\[$black\]]\[\033[0;33m\]$(__git_ps1) \[\033[00m\]\[$reset\]\n\[$reset\]\$ ' 
 
 export PATH="$PATH:$HOME/.composer/vendor/bin"
