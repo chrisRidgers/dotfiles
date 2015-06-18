@@ -1,3 +1,5 @@
+shell -$SHELL
+
 vbell off
 startup_message off
 hardstatus             alwayslastline
