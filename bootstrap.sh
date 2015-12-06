@@ -20,4 +20,16 @@ if [[ $OSTYPE =~ ^darwin ]]; then
 	else
 		echo "Info    | Already Installed    | Homebrew"
 	fi
+
+	# Configure OSX Defaults
+
+	read -p "Configure OSX using .osx? (y/n)" -n 1 -r
+	echo
+	if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+		echo "Info    | Not configuring OSX    | .osx"
+	else
+		echo "Info    | Configuring OSX    | .osx"
+		. .osx
+	fi
+
 fi
