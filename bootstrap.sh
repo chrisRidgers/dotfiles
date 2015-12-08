@@ -61,4 +61,39 @@ if [[ $OSTYPE =~ ^darwin ]]; then
 	else
 		echo "Info    | Already Installed    | Oh My ZSH"
 	fi
+
+	# Download and install git
+	if [[ ! -x /usr/local/bin/git ]]; then
+		echo "Info   | Install   | git"
+		brew install git
+	else
+		echo "Info    | Already Installed    | git"
+	fi
+
+	# Download and install python
+	if [[ ! -x /usr/local/bin/python ]]; then
+		echo "Info   | Install   | python"
+		brew install python --framework --with-brewed-openssl
+	else
+		echo "Info    | Already Installed    | python"
+	fi
+
+	# Download and install Ansible
+	if [[ ! -x /usr/local/bin/ansible ]]; then
+		echo "Info    | Install    | ansible"
+		sudo pip install ansible
+	else
+		echo "Info    | Already Installed    | ansible"
+	fi
+
+	ANSIBLE_PROVISIONING_URL='https://ChrisRidgers@bitbucket.org/ChrisRidgers/bootstrap.git'
+	ANSIBLE_PROVISIONING_REPO="$HOME/.ansible-provision"
+	if [[ ! -d $ANSIBLE_PROVISIONING_REPO ]]; then
+		echo "Info    | Cloning down the Mashbo Provisioning Repo    | ansible"
+		git clone $ANSIBLE_PROVISIONING_URL $ANSIBLE_PROVISIONING_REPO
+		(cd $ANSIBLE_PROVISIONING_REPO && git submodule init && git submodule update)
+	fi
+
+	# Ansible Stuff
+	ansible-playbook --ask-sudo-pass -i $ANSIBLE_PROVISIONING_REPO/inventories/local-inventory $ANSIBLE_PROVISIONING_REPO/developer.yml --connection=local
 fi
