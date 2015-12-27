@@ -136,7 +136,7 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 
 	unset update_dotfiles_repo;
-	unset osx_bootstrap;
 	unset export_dotfiles;
+	unset osx_bootstrap;
 	unset osx_ansible;
 
