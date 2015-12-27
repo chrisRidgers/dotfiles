@@ -1,9 +1,9 @@
 #!/bin/bash
 
-function update_dotfiles_repo{
+function update_dotfiles_repo() {
 cd "$(dirname "${BASH_SOURCE}")";
 
-git pull origin master;
+git pull origin develop;
 }
 
 function export_dotfiles() {
@@ -115,15 +115,7 @@ sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 	update_dotfiles_repo;
-
-	# If on OSX
-	if [[ $OSTYPE =~ ^darwin ]]; then
-		echo "OS Type OS X Darwin Detected.  Bootstrapping OSX."
-		osx_bootstrap;
-		osx_ansible;
-	fi
-
-
+	
 	if [ "$1" == "--force" -o "$1" == "-f" ]; then
 		export_dotfiles;
 	else
@@ -133,6 +125,15 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 			export_dotfiles;
 		fi;
 	fi;
+
+	# If on OSX
+	if [[ $OSTYPE =~ ^darwin ]]; then
+		echo "OS Type OS X Darwin Detected.  Bootstrapping OSX."
+		osx_bootstrap;
+		osx_ansible;
+	fi
+
+
 
 	unset update_dotfiles_repo;
 	unset osx_bootstrap;
