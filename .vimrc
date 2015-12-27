@@ -9,14 +9,9 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-surround'
-<<<<<<< HEAD
-=======
-"Plugin 'Valloric/YouCompleteMe'
 Plugin 'craigemery/vim-autotag'
-"Bundle 'stephpy/vim-php-cs-fixer'
 Plugin 'lepture/vim-jinja'
 Plugin 'joonty/vim-phpqa.git'
->>>>>>> develop
 
 call vundle#end()
 
