@@ -13,7 +13,7 @@ rsync --exclude ".git" --exclude ".DS_Store" --exclude "bootstrap.sh" \
 
 function osx_bootstrap() {
 # Download and install command line tools
-if [[ $(xcode-select -p > /dev/null 2>&1) ]]; then
+if [[ $(xcode-select -p 2>&1 > /dev/null) ]]; then
     echo "Info    | Install    | xcode"
     xcode-select --install
 else
@@ -42,7 +42,7 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     echo "Info    | Not configuring OSX    | .osx"
 else
     echo "Info    | Configuring OSX    | .osx"
-    . .osx
+    . $HOME/.osx
 fi
 
 # Install Zsh
