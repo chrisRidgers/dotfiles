@@ -1,5 +1,6 @@
 "compatibility limitations
 set nocompatible "be ViMproved
+set t_Co=256
 
 filetype off
 
@@ -8,6 +9,14 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-surround'
+<<<<<<< HEAD
+=======
+"Plugin 'Valloric/YouCompleteMe'
+Plugin 'craigemery/vim-autotag'
+"Bundle 'stephpy/vim-php-cs-fixer'
+Plugin 'lepture/vim-jinja'
+Plugin 'joonty/vim-phpqa.git'
+>>>>>>> develop
 
 call vundle#end()
 
@@ -90,13 +99,26 @@ set virtualedit=all
 set incsearch
 
 set t_Co=256
+"colorcolumn and wrapping
+set colorcolumn=80
 
 "netrw_setup
 let g:netrw_preview 		= 1
 let g:netrw_liststyle 		= 4
 let g:netrw_browse_split 	= 4
 let g:netrw_altv		= 1
-let g:netrw_banner		= 0
+"let g:netrw_banner		= 0
 let g:netrw_fastbrowse		= 2
 let g:netrw_winsize 		= 80 
 let g:netrw_keepdir 		= 1
+
+"solarized colorscheme
+set background=light
+let g:solarized_colors = 256
+let g:solarized_termtrans = 1
+colorscheme solarized
+
+autocmd BufNewFile,BufRead *.html.twig set syntax=jinja.html
+
+"phpqa
+let g:phpqa_codesniffer_args = "--standard=PSR2"
