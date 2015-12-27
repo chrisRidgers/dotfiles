@@ -3,7 +3,7 @@
 function update_dotfiles_repo() {
 cd "$(dirname "${BASH_SOURCE}")";
 
-git pull origin develop;
+git pull origin master;
 }
 
 function export_dotfiles() {
