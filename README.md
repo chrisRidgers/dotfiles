@@ -36,7 +36,7 @@
             - heroku toolkit (OSX/ Linux)
         - Digital Services
             - 1password (OSX/ Linux)
-            - Dropbox (OSX/ Linux)x
+            - Dropbox (OSX/ Linux)
             - Amazon S3 (OSX/ Linux)
             - Heroku (OSX/ Linux)
             - Google Accounts (OSX/ Linux)
@@ -44,7 +44,7 @@
         - PHP base
             - PHP stable (OSX/ Linux)
         - PHP dev
-            - PHPEN (OSX/ Linux)V
+            - PHPENV (OSX/ Linux)
             - PHP stable (OSX/ Linux)
             - PHP latest (OSX/ Linux)
         - RUBY base

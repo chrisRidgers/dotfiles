@@ -1,13 +1,13 @@
 #!/bin/bash
 
 function update_dotfiles_repo() {
-    cd "$(dirname "${BASH_SOURCE}")"
+cd "$(dirname "${BASH_SOURCE}")"
 
-    git pull origin master
+git pull origin master
 }
 
 function export_dotfiles() {
-    rsync --exclude ".git" --exclude ".DS_Store" --exclude "bootstrap.sh" \
+rsync --exclude ".git" --exclude ".DS_Store" --exclude "bootstrap.sh" \
     --exclude "README.md" -avh --no-perms . ~
 }
 
@@ -96,22 +96,29 @@ fi
 }
 
 function osx_ansible() {
+read -p "Run ansible provisioning?" -n 1 -r
+echo ""
+if [[ ! $REPLY =~ ^[Yy]$ ]];then
+    echo "Info    | Not running ansible provisioning                 | ansible"
+else
+    echo "Info    | Running ansible provisioning                 | ansible"
     ANSIBLE_PROVISIONING_URL='https://ChrisRidgers@bitbucket.org/ChrisRidgers/bootstrap.git'
     ANSIBLE_PROVISIONING_REPO="$HOME/.ansible-provision"
 
     echo "Info    | Downloading porvisioning repo over https, password can be found in 1password | ansible"
     if [[ ! -d $ANSIBLE_PROVISIONING_REPO ]];then
-        echo "Info    | Cloning down the Mashbo Provisioning Repo    | ansible"
-        git clone $ANSIBLE_PROVISIONING_URL $ANSIBLE_PROVISIONING_REPO
-        (cd $ANSIBLE_PROVISIONING_REPO && git submodule init && git submodule update)
+	echo "Info    | Cloning down the Mashbo Provisioning Repo    | ansible"
+	git clone $ANSIBLE_PROVISIONING_URL $ANSIBLE_PROVISIONING_REPO
+	(cd $ANSIBLE_PROVISIONING_REPO && git submodule init && git submodule update)
 	echo "Info    | Remember to add this devices public ssh key to the bitbucket repo via the web interface | ansible"
     else
 	echo "Info    | Updating the provision repo		     | ansible"
 	(cd $ANSIBLE_PROVISIONING_REPO && git checkout master && git pull && git submodule update)
     fi
 
-# Ansible Stuff
-ansible-playbook -i $ANSIBLE_PROVISIONING_REPO/inventories/local-inventory $ANSIBLE_PROVISIONING_REPO/developer.yml --connection=local
+    # Ansible Stuff
+    ansible-playbook -i $ANSIBLE_PROVISIONING_REPO/inventories/local-inventory $ANSIBLE_PROVISIONING_REPO/developer.yml --connection=local
+fi
 }
 
 # Ask for the administrator password upfront
@@ -120,26 +127,26 @@ sudo -v
 # Keep-alive: update existing `sudo` time stamp until boostrap has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-update_dotfiles_repo
+    update_dotfiles_repo
 
-if [ "$1" == "--force" -o "$1" == "-f" ];then
+    if [ "$1" == "--force" -o "$1" == "-f" ];then
 	export_dotfiles
-else
+    else
 	read -p "This may overwrite existing files in your home directory.  Are you sure? (y/n) " -n 1
 	echo ""
 	if [[ $REPLY =~ ^[Yy]$ ]];then
-       export_dotfiles
-   fi
-fi
+	    export_dotfiles
+	fi
+    fi
 
-# If on OSX
-if [[ $OSTYPE =~ ^darwin ]];then
-    echo "OS Type OS X Darwin Detected.  Bootstrapping OSX."
-    osx_bootstrap
-    osx_ansible
-fi
-unset update_dotfiles_repo
-unset export_dotfiles
-unset osx_bootstrap
-unset osx_ansible
+    # If on OSX
+    if [[ $OSTYPE =~ ^darwin ]];then
+	echo "OS Type OS X Darwin Detected.  Bootstrapping OSX."
+	osx_bootstrap
+	osx_ansible
+    fi
+    unset update_dotfiles_repo
+    unset export_dotfiles
+    unset osx_bootstrap
+    unset osx_ansible
 
