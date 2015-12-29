@@ -98,10 +98,16 @@ fi
 function osx_ansible() {
     ANSIBLE_PROVISIONING_URL='https://ChrisRidgers@bitbucket.org/ChrisRidgers/bootstrap.git'
     ANSIBLE_PROVISIONING_REPO="$HOME/.ansible-provision"
+
+    echo "Info    | Downloading porvisioning repo over https, password can be found in 1password | ansible"
     if [[ ! -d $ANSIBLE_PROVISIONING_REPO ]];then
         echo "Info    | Cloning down the Mashbo Provisioning Repo    | ansible"
         git clone $ANSIBLE_PROVISIONING_URL $ANSIBLE_PROVISIONING_REPO
         (cd $ANSIBLE_PROVISIONING_REPO && git submodule init && git submodule update)
+	echo "Info    | Remember to add this devices public ssh key to the bitbucket repo via the web interface | ansible"
+    else
+	echo "Info    | Updating the provision repo		     | ansible"
+	(cd $ANSIBLE_PROVISIONING_REPO && git checkout master && git pull && git submodule update)
     fi
 
 # Ansible Stuff
